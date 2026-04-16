@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">CI Assignment</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <span class="navbar-text me-3">Welcome, <?php echo $this->session->userdata('full_name'); ?> (<?php echo ucfirst($this->session->userdata('user_type')); ?>)</span>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url('auth/logout'); ?>" class="btn btn-danger btn-sm">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
