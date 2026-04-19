@@ -13,10 +13,10 @@ class Employee extends CI_Controller {
     }
 
     public function index() {
-        $zip_search = $this->input->get('zip_search');
+        $zip_search = $this->input->post('zip_search');
          // Get current page number from URL segment 3 (e.g., employee/index/3)
         $page = ($this->uri->segment(3)) ? (int)$this->uri->segment(3) : 0;
-        $per_page = 5;
+        $per_page = 3;
 
         $config['base_url'] = base_url('employee/index');
         $config['total_rows'] = $this->User_model->get_dealers_count($zip_search);

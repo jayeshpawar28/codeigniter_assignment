@@ -58,7 +58,7 @@ class Auth extends CI_Controller {
     }
 
     public function login() {
-        // If session exists and user is logged in, redirect to appropriate dashboard
+        // If session exists and user is logged in, redirect to dashboard
         if ($this->session->userdata('logged_in') === TRUE) {
             $user_type = $this->session->userdata('user_type');
             if ($user_type == 'employee') {
@@ -100,7 +100,7 @@ class Auth extends CI_Controller {
             ];
             $this->session->set_userdata($session_data);
 
-            if ($user->user_type == 'dealer' && (empty($user->city) || empty($user->state) || empty($user->zip))) {
+            if ($user->user_type == 'dealer' && (empty($user->city) && empty($user->state) && empty($user->zip))) {
                 echo json_encode(['status' => 'success', 'redirect' => 'dealerSetup']);
             } else {
                 echo json_encode(['status' => 'success', 'redirect' => $user->user_type == 'employee' ? 'employee' : 'dealer']);

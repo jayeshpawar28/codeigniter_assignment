@@ -17,7 +17,7 @@ $(document).ready(function () {
 					$("#registerForm")[0].reset();
 					setTimeout(function () {
 						window.location.href = base_url + "auth/login";
-					}, 3000);
+					}, 2500);
 				} else {
 					$("#alert").html(
 						'<div class="alert alert-danger">' + res.errors + "</div>",
@@ -105,6 +105,9 @@ $(document).ready(function () {
 					$("#alert").html(
 						'<div class="alert alert-success">' + res.message + "</div>",
 					);
+					setTimeout(function(){
+						window.location.href = base_url + "dealer";
+					}, 1500);
 				} else {
 					$("#alert").html(
 						'<div class="alert alert-danger">' + res.errors + "</div>",
