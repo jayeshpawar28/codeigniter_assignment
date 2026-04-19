@@ -13,7 +13,6 @@ class Employee extends CI_Controller {
     }
 
     public function index() {
-        echo 'hey';
         $zip_search = $this->input->post('zip_search');
          // Get current page number from URL segment 3 (e.g., employee/index/3)
         $page = ($this->uri->segment(3)) ? (int)$this->uri->segment(3) : 0;
