@@ -8,6 +8,7 @@ class Auth extends CI_Controller {
         $this->load->model('User_model');
     }
 
+
     public function register() {
         if ($this->session->userdata('logged_in')) {
             redirect($this->session->userdata('user_type') == 'employee' ? 'employee' : 'dealer');
