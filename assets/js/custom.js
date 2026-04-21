@@ -27,6 +27,7 @@ $(document).ready(function () {
 		});
 	});
 
+	
 	$("#submitDealer").on("submit", function (e) {
 		e.preventDefault();
 		$.ajax({
