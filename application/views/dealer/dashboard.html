@@ -33,7 +33,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Zip Code</label>
-                                <input type="text" name="zip" id="zip" class="form-control" value="<?php echo $dealer->zip; ?>" required>
+                                <input type="text" name="zip" id="zip" class="form-control" value="<?php echo $dealer->zip; ?>" required minlength="6" maxlength="6">
                             </div>
                             <button type="submit" class="btn btn-primary">Update Location</button>
                         </form>

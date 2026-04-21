@@ -43,11 +43,16 @@ class User_model extends CI_Model {
         }
         return $this->db->count_all_results('users');
     }
+    public function get_dealers() {
+        $this->db->where('user_type', 'dealer');       
+        $query = $this->db->get('users');
+        return $query->result();
+    }
 
-    public function get_dealers_paginated($limit, $offset, $zip_search = null) {
+    public function get_dealers_paginated($limit, $offset, $dealer = null) {
         $this->db->where('user_type', 'dealer');
-        if (!empty($zip_search)) {
-            $this->db->like('zip', $zip_search);
+        if (!empty($dealer)) {
+            $this->db->where('id', $dealer);
         }
         $this->db->limit($limit, $offset);
         $query = $this->db->get('users');

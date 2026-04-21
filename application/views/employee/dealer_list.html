@@ -21,20 +21,28 @@
                 <div id="alert"></div>
                 <form method="POST" class="row g-3 mb-4">
                     <div class="col-md-6">
-                        <input type="text" name="zip_search" class="form-control" placeholder="Filter by Zip Code" value="<?php echo $zip_search; ?>">
+                        <select name="search_dealer" id="search_dealer" class="form-control">
+                            <option value="">All Dealer</option>
+                            <?php foreach($all_dealers as $dealer){ ?>
+                                <option value="<?= $dealer->id; ?>"><?= $dealer->first_name; ?></option>
+                           <?php } ?>
+                        </select>
                     </div>
+                    <!-- <div class="col-md-6">
+                        <input type="text" name="zip_search" class="form-control" placeholder="Filter by Zip Code" value="<?php echo $zip_search; ?>">
+                    </div> -->
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-primary">Search</button>
                         <a href="<?php echo base_url('employee'); ?>" class="btn btn-secondary">Reset</a>
                     </div>
                 </form>
-
+                <?php if($show_list){?>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <!-- <th>Name</th> -->
+                            <!-- <th>Email</th> -->
                             <th>City</th>
                             <th>State</th>
                             <th>Zip</th>
@@ -46,24 +54,36 @@
                         $i = $offset + 1; 
                         foreach ($dealers as $dealer): 
                         ?>
+                        <form method="POST" id="submitDealer">
                         <tr>
                             <td><?php echo $i; ?></td>
-                            <td><?php echo $dealer->first_name . ' ' . $dealer->last_name; ?></td>
-                            <td><?php echo $dealer->email; ?></td>
-                            <td><?php echo $dealer->city; ?></td>
-                            <td><?php echo $dealer->state; ?></td>
-                            <td><?php echo $dealer->zip; ?></td>
+                            <!-- <td><?php echo $dealer->first_name . ' ' . $dealer->last_name; ?></td> -->
+                            <!-- <td><?php echo $dealer->email; ?></td> -->
                             <td>
-                                <button class="btn btn-sm btn-warning edit-dealer" data-id="<?php echo $dealer->id; ?>" data-city="<?php echo $dealer->city; ?>" data-state="<?php echo $dealer->state; ?>" data-zip="<?php echo $dealer->zip; ?>">Edit</button>
+                                <input type="text" name="city" value="<?php echo $dealer->city; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $dealer->id; ?>">
+                            </td>
+                            <td>
+                                <input type="text" name="state" value="<?php echo $dealer->state; ?>">
+                                </td>
+                            <td>
+                                <input type="text" name="zip" value="<?php echo $dealer->zip; ?>">
+                                </td>
+                            <td>
+                                <!-- <button class="btn btn-sm btn-warning edit-dealer" data-id="<?php echo $dealer->id; ?>" data-city="<?php echo $dealer->city; ?>" data-state="<?php echo $dealer->state; ?>" data-zip="<?php echo $dealer->zip; ?>">Edit</button> -->
+                                <button class="btn btn-sm btn-success" name="update" id="updateDealer" type="submit">Update</button>
                             </td>
                         </tr>
+                    </form>
                         <?php $i++;
                          endforeach; ?>
                     </tbody>
                 </table>
+                
                 <div class="d-flex justify-content-center">
                     <?php echo $pagination; ?>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>

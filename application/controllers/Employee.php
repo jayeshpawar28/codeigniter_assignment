@@ -14,7 +14,24 @@ class Employee extends CI_Controller {
 
     public function index() {
         $zip_search = $this->input->post('zip_search');
-         // Get current page number from URL segment 3 (e.g., employee/index/3)
+        $submit = $this->input->post('update');
+        $dealer_search = $this->input->post('search_dealer');
+        $show_list = false;
+        if(!empty($dealer_search)){
+            $show_list = true;
+        }
+
+        if($submit){
+            echo 'hey';die;
+            $data = [
+                'city'  => $this->input->post('city'),
+                'state' => $this->input->post('state'),
+                'zip'   => $this->input->post('zip')
+            ];
+        }
+        $data['show_list'] = $show_list;
+
+        // echo $zip_search;die;
         $page = ($this->uri->segment(3)) ? (int)$this->uri->segment(3) : 0;
         $per_page = 3;
 
@@ -41,10 +58,11 @@ class Employee extends CI_Controller {
 
         $this->pagination->initialize($config);
         $data['offset'] = $page;
-        $data['dealers'] = $this->User_model->get_dealers_paginated($config['per_page'], $page, $zip_search);
+        $data['dealers'] = $this->User_model->get_dealers_paginated($config['per_page'], $page, $dealer_search);
         $data['pagination'] = $this->pagination->create_links();
         $data['zip_search'] = $zip_search;
-
+        $data['all_dealers'] = $this->User_model->get_dealers();
+        // echo '<pre>';print_r($data['dealers']);die;
         // $this->load->view('templates/header.html');
         $this->load->view('employee/dealer_list.html', $data);
         // $this->load->view('templates/footer.html');

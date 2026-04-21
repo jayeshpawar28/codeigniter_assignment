@@ -1,9 +1,9 @@
 $(document).ready(function () {
 	// Registration form submission with AJAX
 	$("#registerForm").on("submit", function (e) {
+		var data = $(this).serialize();
 		e.preventDefault();
 		if (!validateRegisterForm()) return;
-
 		$.ajax({
 			url: base_url + "auth/do_register",
 			type: "POST",
@@ -26,6 +26,48 @@ $(document).ready(function () {
 			},
 		});
 	});
+
+	$("#submitDealer").on("submit", function (e) {
+		e.preventDefault();
+		$.ajax({
+			url: base_url + "dealer/update_location",
+			type: "POST",
+			data: $(this).serialize(),
+			dataType: "json",
+			success: function (res) {
+				if (res.status === "success") {
+					alert('Updated');
+				} else {
+					// $("#alert").html(
+					// 	'<div class="alert alert-danger">' + res.errors + "</div>",
+					// );
+				}
+			},
+		});
+	});
+
+	// $("#search_dealer").on("change", function () {
+	// 	let dealer = $(this).val();
+	// 	// alert(dealer);
+
+	// 	if (dealer) {
+	// 		$.ajax({
+	// 			url: base_url + "dealer/getdetails",
+	// 			type: "POST",
+	// 			data: { dealer: dealer },
+	// 			dataType: "json",
+	// 			success: function (res) {
+	// 				// if (res.exists) {
+	// 				// 	$("#email").addClass("is-invalid");
+	// 				// 	$("#emailError").text("Email already exists!");
+	// 				// } else {
+	// 				// 	$("#email").removeClass("is-invalid");
+	// 				// 	$("#emailError").text("");
+	// 				// }
+	// 			},
+	// 		});
+	// 	}
+	// });
 
 	// Email availability check via AJAX
 	$("#email").on("blur", function () {
@@ -118,6 +160,7 @@ $(document).ready(function () {
 	});
 
 	// Edit dealer modal (Employee)
+	
 	$(".edit-dealer").on("click", function () {
 		let id = $(this).data("id");
 		let city = $(this).data("city");
